@@ -1,6 +1,7 @@
 import streamlit as st
 import yfinance as yf
 import pandas as pd
+import numpy as np
 import plotly.express as px
 
 st.title('Stock Dashboard')
@@ -28,4 +29,22 @@ if ticker:
         st.plotly_chart(fig)
 else:
     st.info("Please enter a stock ticker to fetch data.")
+
+pricing_data,fundamental_data,news=st.tabs(["Pricing Data","Fundamental Data","Top 10 news"])
+
+with pricing_data:
+    st.header("Price Movement")
+    data2=data
+    data2['% change'] = data[adj_close_column]/data[adj_close_column].shift(1)-1
+    data2.dropna(inplace=True)
+    annual_retrun=data2['% change'].mean()*252*100
+    st.write(f'Annual Return: {annual_retrun:.2f}%')
+    stdev=np.std(data2['% change'])*np.sqrt(252)
+    st.write(f'Annual Volatility:',stdev*100,'%')
+
+with fundamental_data:
+    st.write("Fundamental Data")
+
+with news:
+    st.write("Top 10 News")
 
