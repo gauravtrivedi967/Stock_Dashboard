@@ -1,2 +1,10 @@
 matplotlib
 yfinance
+alpha_vantage
+stocknews
+ollama
+tempfile
+base64
+os
+numpy
+plotly
