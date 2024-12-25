@@ -1,5 +1,4 @@
 import os
-import creds
 import base64
 import ollama
 import tempfile
